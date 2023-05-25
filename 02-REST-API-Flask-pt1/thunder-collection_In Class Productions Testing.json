@@ -1,0 +1,103 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "In Class Productions Testing",
+    "dateExported": "2023-05-25T17:03:38.543Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "d044af41-4187-4777-a32f-49f209a047ba",
+            "colId": "901d52a7-c842-4279-8e03-0de7c1b2825c",
+            "containerId": "",
+            "name": "Post a singular Production",
+            "url": "http://127.0.0.1:5555/productions",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-05-25T16:01:31.210Z",
+            "modified": "2023-05-25T16:11:31.200Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"budget\": 1000.0,\n    \"created_at\": \"2023-05-25 15:23:23\",\n    \"description\": \"Thomas' Lecture\",\n    \"director\": \"Princeton\",\n    \"genre\": \"Educational\",\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/6/6a/Edwin_Booth_Hamlet_1870.jpg\",\n    \"ongoing\": true,\n    \"title\": \"Hamlet\",\n    \"updated_at\": null\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "728b5418-4e80-449b-ac39-4c4fe1998ae1",
+            "colId": "901d52a7-c842-4279-8e03-0de7c1b2825c",
+            "containerId": "",
+            "name": "Get all productions",
+            "url": "http://127.0.0.1:5555/productions",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-05-25T16:01:50.857Z",
+            "modified": "2023-05-25T16:34:50.508Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "f9943277-adb6-4544-ae44-9aec15b60bc3",
+            "colId": "901d52a7-c842-4279-8e03-0de7c1b2825c",
+            "containerId": "",
+            "name": "Get Production by Id",
+            "url": "http://127.0.0.1:5555/productions/2",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-05-25T16:33:36.309Z",
+            "modified": "2023-05-25T16:39:50.824Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "eba55c58-f65f-4f8e-858a-b45464c3ddc6",
+            "colId": "901d52a7-c842-4279-8e03-0de7c1b2825c",
+            "containerId": "",
+            "name": "Get Production by Id - expects a 404",
+            "url": "http://127.0.0.1:5555/productions/7",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-05-25T16:42:50.135Z",
+            "modified": "2023-05-25T16:43:03.152Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "a14ae83b-1810-4661-9b06-42ff0470341b",
+            "colId": "901d52a7-c842-4279-8e03-0de7c1b2825c",
+            "containerId": "",
+            "name": "Change title hamlet -> to \"thomas' lecture\" for the new production",
+            "url": "http://127.0.0.1:5555/productions/5",
+            "method": "PATCH",
+            "sortNum": 50000,
+            "created": "2023-05-25T16:52:54.222Z",
+            "modified": "2023-05-25T16:55:18.693Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"budget\": 1500.0,\n    \"title\": \"Flask Api Lecture\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "3bea469b-8aef-4a79-941c-d72a727568c6",
+            "colId": "901d52a7-c842-4279-8e03-0de7c1b2825c",
+            "containerId": "",
+            "name": "Delete",
+            "url": "http://127.0.0.1:5555/productions/2",
+            "method": "DELETE",
+            "sortNum": 60000,
+            "created": "2023-05-25T16:56:45.127Z",
+            "modified": "2023-05-25T16:59:50.333Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}
