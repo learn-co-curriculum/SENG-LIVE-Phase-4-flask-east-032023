@@ -4,7 +4,7 @@
 # Set up:
     # cd into server and run the following in Terminal
         # export FLASK_APP=app.py
-        # export FLASK_RUN_PORT=5000
+        # export FLASK_RUN_PORT=5555
         # flask db init
         # flask db revision --autogenerate -m'Create tables' 
         # flask db upgrade 
@@ -14,18 +14,18 @@
     # Create Procfile.dev in root
         # in Procfile.dev add:
             # web: PORT=3000 npm start --prefix client
-            # api: gunicorn -b 127.0.0.1:5000 --chdir ./server app:app
+            # api: gunicorn -b 127.0.0.1:5555 --chdir ./server app:app
         # In Terminal, run:
             # `honcho start -f Procfile.dev`
 
-from flask import Flask, request, make_response, abort
+from flask import Flask, request, make_response, abort, redirect
 from flask_migrate import Migrate
 
 from flask_restful import Api, Resource
 from werkzeug.exceptions import NotFound
 
 # 4.✅ Import CORS from flask_cors, invoke it and pass it app
-
+from flask_cors import CORS
 
 # 5.✅ Start up the server / client and navigate to client/src/App.js
 
@@ -39,6 +39,7 @@ app.json.compact = False
 
 migrate = Migrate(app, db)
 db.init_app(app)
+CORS( app )
 
 
 api = Api(app)
@@ -75,6 +76,10 @@ class Productions(Resource):
         )
         return response
 api.add_resource(Productions, '/productions')
+
+@app.route( '/productions/' )
+def redirect_productions ( ) :
+    return redirect( '/productions' )
 
 
 class ProductionByID(Resource):
@@ -214,8 +219,8 @@ api.add_resource(CastMembersByID, '/cast_members/<int:id>')
 
 
 # To run the file as a script
-# if __name__ == '__main__':
-#     app.run(port=5000, debug=True)
+if __name__ == '__main__':
+    app.run(port=5555, debug=True)
 
 #Sample Data for testing POST
 # {

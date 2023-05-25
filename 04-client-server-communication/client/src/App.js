@@ -11,11 +11,21 @@ import Navigation from './components/Navigation'
 import ProductionDetail from './components/ProductionDetail'
 import NotFound from './components/NotFound'
 
+const baseUrl = 'http://127.0.0.1:5555/'
+const productionsUrl = baseUrl + 'productions/'
+
+
 function App() {
   const [productions, setProductions] = useState([])
   const [production_edit, setProductionEdit] = useState(false)
   const history = useHistory()
   //5.✅ GET Productions
+  useEffect( () => fetchProductions(), [] )
+
+  const fetchProductions = ( ) =>
+    fetch( productionsUrl )
+    .then( r => r.json() )
+    .then( setProductions )
   
   // 6.✅ navigate to client/src/components/ProductionForm.js
 
