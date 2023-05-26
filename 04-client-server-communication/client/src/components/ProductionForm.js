@@ -1,42 +1,82 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
-// 6.✅ Verify formik and yet have been added to our package.json dependencies 
-  // import the useFormik hook from formik
-  // import * as yup for yup
 
-
+const initialState = {
+  title: '',
+  genre: '',
+  budget: '',
+  image: '',
+  director: '',
+  description: '',
+}
 
 function ProductionForm({addProduction}) {
 
   const history = useHistory()
-  // 7.✅ Use yup to create client side validations
- 
+  // 7.✅ Build out form to handle post request
 
+  const [ formData, setFormData ] = useState( initialState )
 
-  // 9.✅ useFormik hook
+  const handleFormData = event => {
+    const { name, value } = event.target
+    const updateFormData = {...formData, [ name ] : value }
+    setFormData( updateFormData )
+  }
 
+  const handleSubmit = event => {
+    event.preventDefault()
+    addProduction( formData )
+    setFormData( initialState )
+  }
 
     return (
       <div className='App'>
-      <Form >
+      <Form onSubmit = { handleSubmit }>
         <label>Title </label>
-        <input type='text' name='title' />
+        <input 
+          type='text'
+          name='title'
+          value = { formData.title }
+          onChange = { handleFormData }
+          required
+          />
         
         <label> Genre</label>
-        <input type='text' name='genre' />
+        <input type='text' 
+        name='genre' 
+        value = { formData.genre }
+        onChange = { handleFormData }
+        />
       
         <label>Budget</label>
-        <input type='number' name='budget' />
+        <input type='number' 
+        name='budget' 
+        min = '0' 
+        value = { formData.budget }
+        onChange = { handleFormData }
+        />
       
         <label>Image</label>
-        <input type='text' name='image'  />
+        <input type='text' 
+        name='image'  
+        value = { formData.image }
+        onChange = { handleFormData }
+        />
       
         <label>Director</label>
-        <input type='text' name='director'/>
+        <input type='text' 
+        name='director'
+        value = { formData.director }
+        onChange = { handleFormData }
+        />
       
         <label>Description</label>
-        <textarea type='text' rows='4' cols='50' name='description' />
+        <textarea type='text' rows='4' cols='50' 
+        name='description' 
+        value = { formData.description }
+        onChange = { handleFormData }
+        />
       
         <input type='submit' />
       </Form> 
