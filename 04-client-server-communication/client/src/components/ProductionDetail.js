@@ -2,22 +2,24 @@ import  {useParams, useHistory } from 'react-router-dom'
 import {useEffect, useState} from 'react'
 import styled from 'styled-components'
 
-function ProductionDetail({handleEdit, deleteProduction}) {
+function ProductionDetail({handleEdit, deleteProduction, productionsUrl }) {
   const [production, setProduction] = useState({cast_members:[]})
   const [error, setError] = useState(null)
   //Student Challenge: GET One 
   const params = useParams()
   const history = useHistory()
   useEffect(()=>{
-
+    fetch( productionsUrl + `/${ params.id }` )
+    .then( r => r.json() )
+    .then( setProduction )
   },[])
-
-  const handleDelete = (production) => {
-
+  const {id, title, genre, image,description, cast_members} = production 
+  
+  const handleDelete = ( ) => {
+    deleteProduction( id )
   }
 
   
-  const {id, title, genre, image,description, cast_members} = production 
   if(error) return <h2>{error}</h2>
   return (
       <CardDetail id={id}>
