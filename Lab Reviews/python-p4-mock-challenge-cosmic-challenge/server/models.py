@@ -20,7 +20,8 @@ db = SQLAlchemy(metadata=metadata)
 class Planet(db.Model, SerializerMixin):
     __tablename__ = 'planets'
 
-    serialize_rules = ( '-scientists.planet' )
+    # serialize_rules = ( '-scientists.planet', )
+    serialize_rules = ( '-missions.planet', '-scientists.planets' )
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
@@ -39,7 +40,8 @@ class Planet(db.Model, SerializerMixin):
 class Scientist(db.Model, SerializerMixin):
     __tablename__ = 'scientists'
 
-    serialize_rules = ( '-planets.scientist' )
+    # serialize_rules = ( '-planets.scientist', )
+    serialize_rules = ( '-missions.scientist', '-planets.scientists' )
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
@@ -74,7 +76,8 @@ class Scientist(db.Model, SerializerMixin):
 class Mission(db.Model, SerializerMixin):
     __tablename__ = 'missions'
 
-    serialize_rules = ( '-mission.scientist, -mission.planet' )
+    # serialize_rules = ( '-mission.scientist, -mission.planet' )
+    serialize_rules = ( '-scientist.missions', '-planet.missions' )
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column( db.String )
