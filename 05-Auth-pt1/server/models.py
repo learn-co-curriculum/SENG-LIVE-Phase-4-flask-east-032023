@@ -55,12 +55,18 @@ class User(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-    email = db.Column(db.String)
+    email = db.Column(db.String, unique = True )
     admin = db.Column(db.String, default=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
    
-
+    def user_info ( self ) :
+        return {
+            'name': self.name,
+            'email': self.email,
+            'id': self.id
+        }
+    
     def __repr__(self):
         return f'< username:{self.name}'
 

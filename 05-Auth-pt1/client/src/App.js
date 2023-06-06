@@ -19,7 +19,7 @@ function App() {
   const history = useHistory()
 
   useEffect(() => {
-   
+    fetchUser()
     fetchProductions()
   },[])
 
@@ -32,7 +32,16 @@ function App() {
   const fetchUser = () => {
     // 8.✅ Create a GET fetch that goes to '/authorized'
       // If returned successfully set the user to state and fetch our productions
+    fetch( '/authorize' )
+    .then( r => r.json() )
+    .then( user => {
+      if ( !user.errors ) {
+        updateUser( user )
+      }
       // else set the user in state to Null
+      else updateUser( null )
+    })
+
    
 }
  
@@ -47,12 +56,23 @@ function App() {
   const updateUser = (user) => setUser(user)
   // 9.✅ Return a second block of JSX
     // If the user is not in state return JSX and include <GlobalStyle /> <Navigation/> and  <Authentication updateUser={updateUser}/>
+    
+  if ( !user ) 
+    return (
+      <>
+        <GlobalStyle />
+        <Navigation updateUser={updateUser}  handleEdit={handleEdit} user = { user }/>
+        <Authentication updateUser={updateUser}/>
+      </>
+    )
+    
     //9.1 Test out our route! Logout and try to visit other pages. Login and try to visit other pages again. Refresh the page and note that you are still logged in! 
+
   
   return (
     <>
     <GlobalStyle />
-    <Navigation updateUser={updateUser}  handleEdit={handleEdit}/>
+    <Navigation updateUser={updateUser}  handleEdit={handleEdit} user = { user }/>
       <Switch>
         <Route path='/productions/new'>
           <ProductionForm addProduction={addProduction}/>
